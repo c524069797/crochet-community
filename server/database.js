@@ -24,6 +24,8 @@ export function initDB() {
       price_range TEXT,
       rating REAL DEFAULT 0,
       rating_count INTEGER DEFAULT 0,
+      rank INTEGER DEFAULT 0,
+      recommend_reason TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
@@ -32,6 +34,7 @@ export function initDB() {
       product_id INTEGER NOT NULL,
       platform TEXT NOT NULL,
       url TEXT NOT NULL,
+      price TEXT,
       FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
     );
 

@@ -5,6 +5,11 @@
       <p>图解教程与视频教学，助你提升钩织技能</p>
     </div>
 
+    <div class="third-party-notice">
+      <span class="notice-icon">ℹ️</span>
+      <span>本页面部分资源来自第三方平台（B站等），点击将跳转至原始网站。本站仅提供索引服务，不存储任何第三方内容，相关权利归原作者所有。</span>
+    </div>
+
     <div class="tab-bar">
       <button class="tab-btn" :class="{ active: tab === 'all' }" @click="tab = 'all'">全部</button>
       <button class="tab-btn" :class="{ active: tab === 'pattern' }" @click="tab = 'pattern'">📖 图解</button>
@@ -50,3 +55,22 @@ onMounted(async () => {
   resources.value = await res.json()
 })
 </script>
+
+<style scoped>
+.third-party-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: #fef9ef;
+  border: 1px solid #f0dca0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color: #8a6d3b;
+  line-height: 1.5;
+}
+.notice-icon {
+  flex-shrink: 0;
+}
+</style>
