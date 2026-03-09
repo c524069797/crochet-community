@@ -622,12 +622,52 @@ select.form-control {
 }
 
 /* ========== Responsive ========== */
+
+/* 平板设备 */
 @media (max-width: 768px) {
-  .hero h1 { font-size: 2rem; }
-  .hero { padding: 50px 20px; }
-  .feature-grid { grid-template-columns: 1fr; }
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
-  .product-detail { grid-template-columns: 1fr; }
+  :root {
+    --max-width: 100%;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  .hero {
+    padding: 50px 20px;
+  }
+  .hero p {
+    font-size: 1.05rem;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .product-detail {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 20px 0;
+  }
+
+  .product-detail-img img {
+    height: 300px;
+  }
+
   .navbar-nav { display: none; }
   .navbar-nav.open {
     display: flex;
@@ -637,16 +677,308 @@ select.form-control {
     left: 0;
     right: 0;
     background: rgba(255,248,240,0.98);
+    backdrop-filter: blur(10px);
     padding: 16px;
     border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
-  .mobile-toggle { display: block; }
-  .form-card { margin: 20px; padding: 24px; }
+
+  .navbar-nav.open li {
+    width: 100%;
+  }
+
+  .navbar-nav.open a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 18px;
+  }
+
+  .mobile-toggle {
+    display: block;
+    color: var(--text);
+  }
+
+  .form-card {
+    margin: 20px;
+    padding: 24px;
+  }
+
+  .page-header {
+    padding: 30px 0 20px;
+  }
+
+  .page-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .section {
+    padding: 40px 0;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .card-img {
+    height: 180px;
+  }
+
+  .post-item {
+    padding: 16px;
+  }
+
+  .post-detail {
+    padding: 20px 0;
+  }
+
+  .post-detail-body {
+    padding: 20px;
+  }
+
+  .filter-bar {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    padding: 6px 16px;
+    font-size: 0.85rem;
+  }
 }
 
+/* 手机设备 */
 @media (max-width: 480px) {
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  .hero-actions { flex-direction: column; align-items: center; }
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .main-content {
+    padding-top: 60px;
+  }
+
+  .navbar {
+    height: 60px;
+  }
+
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+
+  .navbar-brand span {
+    font-size: 1.4rem;
+  }
+
+  .navbar-nav.open {
+    top: 60px;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .hero {
+    padding: 40px 16px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card-img {
+    height: 160px;
+  }
+
+  .card-body {
+    padding: 14px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .card-text {
+    font-size: 0.85rem;
+  }
+
+  .feature-card {
+    padding: 30px 20px;
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .feature-card p {
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+
+  .btn-sm {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+
+  .page-header {
+    padding: 24px 0 16px;
+  }
+
+  .page-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .page-header p {
+    font-size: 0.95rem;
+  }
+
+  .section {
+    padding: 30px 0;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .section-desc {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+
+  .product-detail-img img {
+    height: 240px;
+  }
+
+  .product-info h1 {
+    font-size: 1.4rem;
+  }
+
+  .product-info .price {
+    font-size: 1.1rem;
+  }
+
+  .product-info .description {
+    font-size: 0.9rem;
+  }
+
+  .post-item {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .post-title {
+    font-size: 1rem;
+  }
+
+  .post-meta {
+    font-size: 0.8rem;
+    gap: 12px;
+  }
+
+  .post-detail-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .post-detail-body {
+    padding: 16px;
+    font-size: 0.95rem;
+  }
+
+  .comment-item {
+    padding: 14px;
+  }
+
+  .form-card {
+    margin: 12px;
+    padding: 20px;
+  }
+
+  .form-control {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+  }
+
+  textarea.form-control {
+    min-height: 100px;
+  }
+
+  .filter-bar {
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .filter-btn {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+
+  .tab-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .footer {
+    padding: 30px 16px;
+    margin-top: 40px;
+  }
+
+  .footer p {
+    font-size: 0.85rem;
+  }
+}
+
+/* 超小屏幕设备 */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  .hero h1 {
+    font-size: 1.4rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .navbar-brand {
+    font-size: 1rem;
+  }
+
+  .card-body {
+    padding: 12px;
+  }
+
+  .btn {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+  }
 }
 
 /* ========== Resource Tabs ========== */
@@ -683,4 +1015,62 @@ select.form-control {
   text-align: center;
   padding: 40px;
   color: var(--text-muted);
+}
+
+/* ========== Mobile Touch Optimization ========== */
+@media (hover: none) and (pointer: coarse) {
+  /* 触摸设备优化 */
+  .btn, .filter-btn, .tab-btn, .like-btn {
+    min-height: 44px; /* iOS 推荐的最小触摸目标 */
+    -webkit-tap-highlight-color: rgba(232, 160, 191, 0.2);
+  }
+
+  .navbar-nav a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .buy-link {
+    min-height: 56px;
+    -webkit-tap-highlight-color: rgba(232, 160, 191, 0.1);
+  }
+
+  .card {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 禁用长按选择 */
+  .card, .btn, .filter-btn, .tab-btn {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* 移除 hover 效果，使用 active 代替 */
+  .card:active {
+    transform: scale(0.98);
+  }
+
+  .btn:active {
+    transform: scale(0.95);
+  }
+}
+
+/* ========== Safe Area (iPhone X+) ========== */
+@supports (padding: max(0px)) {
+  .navbar {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+
+  .container {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+
+  .footer {
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
+  }
 }

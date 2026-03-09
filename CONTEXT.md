@@ -18,13 +18,15 @@
 crochet-community/
 ├── package.json
 ├── vite.config.js          # Vite 配置，端口3000，代理API到3001
-├── index.html
+├── index.html              # 已添加移动端优化 meta 标签
 ├── .gitignore
 ├── src/
 │   ├── main.js
 │   ├── App.vue
 │   ├── router/index.js     # Vue Router 路由配置
-│   ├── styles/main.css     # 全局样式（暖色系主题）
+│   ├── styles/main.css     # 全局样式（暖色系主题 + 完整移动端适配）
+│   ├── utils/
+│   │   └── appJump.js      # 第三方电商 App 跳转工具（淘宝/拼多多/京东等）
 │   ├── components/
 │   │   ├── Navbar.vue      # 导航栏（响应式+移动端菜单）
 │   │   ├── Footer.vue
@@ -34,7 +36,7 @@ crochet-community/
 │   └── views/
 │       ├── Home.vue        # 首页（英雄区+特色+最新内容）
 │       ├── Products.vue    # 产品列表（分类筛选）
-│       ├── ProductDetail.vue# 产品详情（购买链接）
+│       ├── ProductDetail.vue# 产品详情（购买链接 + App 跳转）
 │       ├── Resources.vue   # 资源列表（图解/视频标签+分类）
 │       ├── Forum.vue       # 讨论区列表
 │       ├── NewPost.vue     # 发帖页面
@@ -60,6 +62,16 @@ crochet-community/
 ### 4. 数据库已填充种子数据 ✅
 ### 5. API 已测试可用 ✅
 ### 6. Git 已初始化并提交 ✅（commit: bab479d）
+### 7. 移动端完整适配 ✅（新增）
+- 响应式布局：支持 768px、480px、360px 多断点
+- 触摸优化：44px 最小触摸目标、tap 高亮、禁用长按
+- 安全区域：支持 iPhone X+ 刘海屏适配
+- 移动端 meta 标签：viewport、theme-color、PWA 支持
+### 8. 第三方 App 跳转 ✅（新增）
+- 智能跳转：移动端优先打开 App，失败则打开网页
+- 支持平台：淘宝、天猫、拼多多、京东、1688、闲鱼
+- 设备检测：自动识别 iOS/Android/微信浏览器
+- 平台图标：每个平台显示对应的 emoji 图标
 
 ## 未完成的工作
 

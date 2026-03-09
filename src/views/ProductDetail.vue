@@ -28,8 +28,11 @@
         <div class="buy-links">
           <a v-for="link in links" :key="link.id" :href="link.url" target="_blank" class="buy-link" @click.prevent="handleBuyClick(link)">
             <div class="buy-link-info">
-              <span class="platform-name">{{ link.platform }}</span>
-              <span v-if="link.price" class="platform-price">{{ link.price }}</span>
+              <span class="platform-icon">{{ getPlatformIcon(link.platform) }}</span>
+              <div class="platform-details">
+                <span class="platform-name">{{ link.platform }}</span>
+                <span v-if="link.price" class="platform-price">{{ link.price }}</span>
+              </div>
             </div>
             <span class="btn btn-sm btn-primary">去购买</span>
           </a>
@@ -44,6 +47,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { smartJump, isMobile, getPlatformIcon, getPlatformColor } from '../utils/appJump'
 
 const route = useRoute()
 const product = ref(null)
@@ -61,9 +65,32 @@ const rankClass = computed(() => {
 })
 
 function handleBuyClick(link) {
-  const confirmed = confirm(`即将跳转至${link.platform}（第三方电商平台）\n\n参考价格：${link.price || '以页面为准'}\n实际价格以商品页面为准，本站不参与任何交易。\n\n是否继续？`)
+  const mobile = isMobile()
+
+  // 移动端提示
+  const message = mobile
+    ? `即将跳转至${link.platform}\n\n${getPlatformIcon(link.platform)} 移动端将优先打开App\n参考价格：${link.price || '以页面为准'}\n\n实际价格以商品页面为准\n本站不参与任何交易\n\n是否继续？`
+    : `即将跳转至${link.platform}（第三方电商平台）\n\n参考价格：${link.price || '以页面为准'}\n实际价格以商品页面为准，本站不参与任何交易。\n\n是否继续？`
+
+  const confirmed = confirm(message)
+
   if (confirmed) {
-    window.open(link.url, '_blank')
+    if (mobile) {
+      // 移动端使用智能跳转
+      smartJump({
+        platform: link.platform,
+        url: link.url,
+        onSuccess: (type) => {
+          console.log(`跳转成功: ${type}`)
+        },
+        onFail: (reason) => {
+          console.log(`跳转失败: ${reason}`)
+        }
+      })
+    } else {
+      // PC端直接打开新窗口
+      window.open(link.url, '_blank')
+    }
   }
 }
 
@@ -111,23 +138,34 @@ onMounted(async () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
+  padding: 14px 18px;
   border: 1px solid #eee;
   border-radius: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   text-decoration: none;
   color: inherit;
-  transition: background 0.2s;
+  transition: all 0.2s;
   cursor: pointer;
 }
 .buy-link:hover {
   background: #fdf2f8;
   border-color: #e8a0bf;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(232, 160, 191, 0.15);
 }
 .buy-link-info {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+.platform-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.platform-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 .platform-name {
   font-weight: 600;
@@ -137,5 +175,20 @@ onMounted(async () => {
   font-weight: 700;
   color: #e53e3e;
   font-size: 1.05rem;
+}
+
+@media (max-width: 480px) {
+  .buy-link {
+    padding: 12px 14px;
+  }
+  .platform-icon {
+    font-size: 1.3rem;
+  }
+  .platform-name {
+    font-size: 0.9rem;
+  }
+  .platform-price {
+    font-size: 0.95rem;
+  }
 }
 </style>
