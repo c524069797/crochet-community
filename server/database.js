@@ -57,6 +57,7 @@ export function initDB() {
       content TEXT NOT NULL,
       category TEXT NOT NULL CHECK(category IN ('showcase', 'help', 'experience', 'exchange')),
       author_name TEXT NOT NULL,
+      images TEXT,
       likes INTEGER DEFAULT 0,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
@@ -71,6 +72,18 @@ export function initDB() {
       FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
     );
   `)
+
+  // 迁移：为现有 posts 表添加 images 列（如果不存在）
+  try {
+    const columns = db.pragma('table_info(posts)')
+    const hasImages = columns.some(col => col.name === 'images')
+    if (!hasImages) {
+      db.exec('ALTER TABLE posts ADD COLUMN images TEXT')
+      console.log('✅ 已为 posts 表添加 images 列')
+    }
+  } catch (err) {
+    console.log('⚠️  迁移检查:', err.message)
+  }
 
   return db
 }
