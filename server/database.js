@@ -48,6 +48,7 @@ export function initDB() {
       file_url TEXT,
       video_url TEXT,
       platform TEXT,
+      author TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
@@ -80,6 +81,18 @@ export function initDB() {
     if (!hasImages) {
       db.exec('ALTER TABLE posts ADD COLUMN images TEXT')
       console.log('✅ 已为 posts 表添加 images 列')
+    }
+  } catch (err) {
+    console.log('⚠️  迁移检查:', err.message)
+  }
+
+  // 迁移：为现有 resources 表添加 author 列（如果不存在）
+  try {
+    const columns = db.pragma('table_info(resources)')
+    const hasAuthor = columns.some(col => col.name === 'author')
+    if (!hasAuthor) {
+      db.exec('ALTER TABLE resources ADD COLUMN author TEXT')
+      console.log('✅ 已为 resources 表添加 author 列')
     }
   } catch (err) {
     console.log('⚠️  迁移检查:', err.message)

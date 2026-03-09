@@ -16,11 +16,17 @@
         <span class="tag tag-purple">{{ categoryLabel }}</span>
       </div>
       <h3 class="card-title">{{ resource.title }}</h3>
+
+      <!-- 视频作者信息 -->
+      <div v-if="resource.type === 'video' && (resource.platform || resource.author)" class="author-info">
+        <span v-if="resource.platform" class="platform-label">{{ platformLabel }}</span>
+        <span v-if="resource.author" class="author-name">@{{ resource.author }}</span>
+      </div>
+
       <p class="card-text">{{ resource.description?.slice(0, 80) }}</p>
       <div class="card-actions">
         <a v-if="resource.type === 'video' && resource.video_url" href="#" class="btn btn-sm btn-outline" @click.prevent="handleJump(resource.video_url)">观看视频</a>
         <a v-if="resource.type === 'pattern' && resource.file_url" href="#" class="btn btn-sm btn-outline" @click.prevent="handleJump(resource.file_url)">查看图解</a>
-        <span v-if="resource.platform" class="source-text">来自 {{ platformLabel }}</span>
       </div>
     </div>
   </div>
@@ -58,6 +64,21 @@ function handleJump(url) {
   padding: 2px 8px;
   border-radius: 4px;
 }
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.platform-label {
+  color: var(--primary-dark);
+  font-weight: 500;
+}
+.author-name {
+  color: var(--text-light);
+}
 .card-actions {
   margin-top: 12px;
   display: flex;
@@ -67,5 +88,11 @@ function handleJump(url) {
 .source-text {
   font-size: 0.75rem;
   color: #999;
+}
+
+@media (max-width: 480px) {
+  .author-info {
+    font-size: 0.75rem;
+  }
 }
 </style>

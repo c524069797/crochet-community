@@ -17,6 +17,7 @@ const yarnProducts = [
     rating: 4.9, rating_count: 5680,
     rank: 1,
     recommend_reason: '小红书钩娃娃首选线材，"新手入门必买，性价比之王"',
+    image_url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=400&fit=crop',
   },
   {
     name: '雪妃尔五股牛奶棉',
@@ -26,6 +27,7 @@ const yarnProducts = [
     rating: 4.8, rating_count: 4230,
     rank: 2,
     recommend_reason: '小红书热评："钩包包和大玩偶的不二之选"',
+    image_url: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400&h=400&fit=crop',
   },
   {
     name: '苏苏姐家四股精梳棉',
@@ -35,6 +37,7 @@ const yarnProducts = [
     rating: 4.8, rating_count: 3560,
     rank: 3,
     recommend_reason: '小红书新手最爱，"配套教程最全，闭眼入不踩雷"',
+    image_url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=400&fit=crop&sat=-50',
   },
   {
     name: '恒源祥纯羊毛线',
@@ -44,6 +47,7 @@ const yarnProducts = [
     rating: 4.7, rating_count: 12800,
     rank: 4,
     recommend_reason: '小红书织围巾首推，"国民老品牌，品质有保障"',
+    image_url: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400&h=400&fit=crop&hue=30',
   },
   {
     name: '九色鹿时尚棉线',
@@ -53,6 +57,7 @@ const yarnProducts = [
     rating: 4.7, rating_count: 2890,
     rank: 5,
     recommend_reason: '小红书达人推荐，"最时尚的国产毛线品牌"',
+    image_url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=400&fit=crop&hue=180',
   },
   {
     name: '苏苏姐家段染棉',
@@ -62,6 +67,7 @@ const yarnProducts = [
     rating: 4.7, rating_count: 1960,
     rank: 6,
     recommend_reason: '小红书钩花束首选，"段染效果惊艳，颜色仙气十足"',
+    image_url: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400&h=400&fit=crop&hue=270',
   },
   {
     name: '冰丝线（夏季专用）',
@@ -71,6 +77,7 @@ const yarnProducts = [
     rating: 4.6, rating_count: 3450,
     rank: 7,
     recommend_reason: '小红书夏季爆款，"钩包包手感一绝，出片率超高"',
+    image_url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=400&fit=crop&hue=200',
   },
   {
     name: '5号蕾丝棉线',
@@ -80,6 +87,7 @@ const yarnProducts = [
     rating: 4.6, rating_count: 1280,
     rank: 8,
     recommend_reason: '小红书进阶之选，"比牛奶棉精致，比蕾丝线好上手"',
+    image_url: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400&h=400&fit=crop&brightness=-10',
   },
   {
     name: '棉麻混纺线',
@@ -89,6 +97,7 @@ const yarnProducts = [
     rating: 4.5, rating_count: 980,
     rank: 9,
     recommend_reason: '小红书家居博主爱用，"钩杯垫和餐垫自带高级感"',
+    image_url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=400&fit=crop&sat=-30',
   },
   {
     name: '三利纯棉毛线',
@@ -98,6 +107,7 @@ const yarnProducts = [
     rating: 4.5, rating_count: 2150,
     rank: 10,
     recommend_reason: '小红书宝妈推荐，"给宝宝用的线一定要选品牌"',
+    image_url: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400&h=400&fit=crop&hue=60',
   },
 ]
 
@@ -111,6 +121,7 @@ const hookProducts = [
     rating: 4.9, rating_count: 1820,
     rank: 1,
     recommend_reason: '小红书万人推荐，"钩针界的爱马仕"，手感无敌',
+    image_url: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=400&fit=crop',
   },
   {
     name: 'Clover Amour 可乐暧昧钩针套装',
@@ -120,6 +131,7 @@ const hookProducts = [
     rating: 4.9, rating_count: 2350,
     rank: 2,
     recommend_reason: '小红书口碑之王，性价比最高的日系钩针，不分线',
+    image_url: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=400&fit=crop&hue=180',
   },
   {
     name: 'Tulip ETIMO Red 郁金香红色钩针套装',
@@ -129,6 +141,7 @@ const hookProducts = [
     rating: 4.9, rating_count: 986,
     rank: 3,
     recommend_reason: '小红书热评："颜值与实力并存"，蕾丝钩织首选',
+    image_url: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=400&fit=crop&hue=0',
   },
   {
     name: '沪牌钩针',
@@ -138,6 +151,7 @@ const hookProducts = [
     rating: 4.8, rating_count: 1560,
     rank: 4,
     recommend_reason: '小红书国产钩针NO.1，"4.0以下选国产，首选沪牌"',
+    image_url: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=400&fit=crop&sat=-20',
   },
   {
     name: '可钩牌钩针',
@@ -147,6 +161,7 @@ const hookProducts = [
     rating: 4.7, rating_count: 1230,
     rank: 5,
     recommend_reason: '小红书热议："比日系还顺滑"的国货黑马',
+    image_url: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=400&fit=crop&hue=90',
   },
   {
     name: '七针坊钩针',
@@ -156,6 +171,7 @@ const hookProducts = [
     rating: 4.7, rating_count: 890,
     rank: 6,
     recommend_reason: '小红书新手入门首推国产品牌，品控稳定',
+    image_url: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=400&fit=crop&hue=270',
   },
   {
     name: 'Clover 可乐经典金色笔式钩针',
@@ -165,6 +181,7 @@ const hookProducts = [
     rating: 4.8, rating_count: 1680,
     rank: 7,
     recommend_reason: '小红书经典款，"速度型选手的最爱"',
+    image_url: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=400&fit=crop&hue=45',
   },
   {
     name: 'KnitPro Waves 彩木钩针套装',
@@ -174,6 +191,7 @@ const hookProducts = [
     rating: 4.6, rating_count: 456,
     rank: 8,
     recommend_reason: '小红书颜值担当，"最美钩针没有之一"',
+    image_url: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=400&fit=crop&hue=300',
   },
   {
     name: '潮购牌钩针',
@@ -183,6 +201,7 @@ const hookProducts = [
     rating: 4.6, rating_count: 670,
     rank: 9,
     recommend_reason: '小红书高性价比之选，新手友好',
+    image_url: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=400&fit=crop&hue=210',
   },
   {
     name: '普通竹制钩针套装',
@@ -192,12 +211,13 @@ const hookProducts = [
     rating: 4.2, rating_count: 3200,
     rank: 10,
     recommend_reason: '小红书新手试水首选，"不到10块入坑零压力"',
+    image_url: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=400&h=400&fit=crop&hue=120',
   },
 ]
 
 const products = [...yarnProducts, ...hookProducts]
 
-const insertProduct = db.prepare('INSERT INTO products (name, category, subcategory, description, price_range, rating, rating_count, rank, recommend_reason) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')
+const insertProduct = db.prepare('INSERT INTO products (name, category, subcategory, description, price_range, rating, rating_count, rank, recommend_reason, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
 const insertLink = db.prepare('INSERT INTO product_links (product_id, platform, url, price) VALUES (?, ?, ?, ?)')
 
 // 钩针产品购买链接 - 具体价格 + 搜索链接
@@ -309,7 +329,7 @@ const yarnLinks = {
 const allLinks = { ...yarnLinks, ...hookLinks }
 
 for (const p of products) {
-  const result = insertProduct.run(p.name, p.category, p.subcategory, p.description, p.price_range, p.rating, p.rating_count, p.rank || 0, p.recommend_reason || null)
+  const result = insertProduct.run(p.name, p.category, p.subcategory, p.description, p.price_range, p.rating, p.rating_count, p.rank || 0, p.recommend_reason || null, p.image_url || null)
   const pid = result.lastInsertRowid
   const links = allLinks[p.name]
   if (links) {
@@ -321,21 +341,101 @@ for (const p of products) {
 
 // Seed resources
 const resources = [
-  { title: '初学者入门：锁针与短针基础教学', type: 'video', category: 'other', description: '从零开始学钩织！本视频详细讲解锁针起针法和短针的基本钩法，配合慢动作演示，适合完全没有基础的新手。', video_url: 'https://www.bilibili.com/video/BV1example1', platform: 'bilibili' },
-  { title: '可爱小熊玩偶图解', type: 'pattern', category: 'doll', description: '超萌小熊玩偶详细图解，含头部、身体、四肢分片说明。使用棉线+3.0mm钩针，成品约15cm高。新手友好！', file_url: '#' },
-  { title: '花朵祖母方格围巾教程', type: 'video', category: 'scarf', description: '经典祖母方格花样的围巾编织教程，从单个花片到拼接完成，手把手教学。成品温暖又文艺。', video_url: 'https://www.bilibili.com/video/BV1example2', platform: 'bilibili' },
-  { title: '手提编织包图解（含内衬教程）', type: 'pattern', category: 'bag', description: '时尚手提包完整图解，含包体、提手、装饰花朵的钩法。额外附赠内衬缝制教程，实用与美观兼具。', file_url: '#' },
-  { title: '圆形渔夫帽钩织教学', type: 'video', category: 'hat', description: '夏日必备渔夫帽教程！使用冰丝线或棉线，从帽顶开始往下钩，一体成型无需缝合。', video_url: 'https://www.bilibili.com/video/BV1example3', platform: 'bilibili' },
-  { title: '经典菠萝花样方巾图解', type: 'pattern', category: 'scarf', description: '传统菠萝花样方巾图解，花样优雅细腻。使用蕾丝线钩织效果最佳，可作为桌布或披肩使用。', file_url: '#' },
-  { title: '安抚兔玩偶视频教程', type: 'video', category: 'doll', description: '超人气安抚兔详细视频教程，适合送给宝宝的礼物。使用有机棉线，安全无害。分3集讲解完成。', video_url: 'https://www.bilibili.com/video/BV1example4', platform: 'bilibili' },
-  { title: '北欧风杯垫套装图解', type: 'pattern', category: 'other', description: '六款北欧几何风格杯垫图解，简约大方。使用棉线钩织，可作为家居装饰或伴手礼。', file_url: '#' },
-  { title: '斜挎手机包编织教程', type: 'video', category: 'bag', description: '实用斜挎手机包教程，含链条带制作方法。小巧精致，出门只带手机时非常方便！', video_url: 'https://www.bilibili.com/video/BV1example5', platform: 'bilibili' },
-  { title: '婴儿毯拼花图解合集', type: 'pattern', category: 'blanket', description: '5种花片拼接而成的婴儿毯图解，含花片钩法和拼接方法。柔软棉线材质，给宝宝最温柔的呵护。', file_url: '#' },
+  {
+    title: '初学者入门：锁针与短针基础教学',
+    type: 'video',
+    category: 'other',
+    description: '从零开始学钩织！本视频详细讲解锁针起针法和短针的基本钩法，配合慢动作演示，适合完全没有基础的新手。',
+    video_url: 'https://www.bilibili.com/video/BV1example1',
+    platform: 'bilibili',
+    author: '钩织小课堂',
+    image_url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=300&fit=crop',
+  },
+  {
+    title: '可爱小熊玩偶图解',
+    type: 'pattern',
+    category: 'doll',
+    description: '超萌小熊玩偶详细图解，含头部、身体、四肢分片说明。使用棉线+3.0mm钩针，成品约15cm高。新手友好！',
+    file_url: '#',
+    image_url: 'https://images.unsplash.com/photo-1530325553241-4f6e7690cf36?w=400&h=300&fit=crop',
+  },
+  {
+    title: '花朵祖母方格围巾教程',
+    type: 'video',
+    category: 'scarf',
+    description: '经典祖母方格花样的围巾编织教程，从单个花片到拼接完成，手把手教学。成品温暖又文艺。',
+    video_url: 'https://www.bilibili.com/video/BV1example2',
+    platform: 'bilibili',
+    author: '编织达人小美',
+    image_url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=300&fit=crop&hue=330',
+  },
+  {
+    title: '手提编织包图解（含内衬教程）',
+    type: 'pattern',
+    category: 'bag',
+    description: '时尚手提包完整图解，含包体、提手、装饰花朵的钩法。额外附赠内衬缝制教程，实用与美观兼具。',
+    file_url: '#',
+    image_url: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=300&fit=crop',
+  },
+  {
+    title: '圆形渔夫帽钩织教学',
+    type: 'video',
+    category: 'hat',
+    description: '夏日必备渔夫帽教程！使用冰丝线或棉线，从帽顶开始往下钩，一体成型无需缝合。',
+    video_url: 'https://www.bilibili.com/video/BV1example3',
+    platform: 'bilibili',
+    author: '手工生活馆',
+    image_url: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=300&fit=crop',
+  },
+  {
+    title: '经典菠萝花样方巾图解',
+    type: 'pattern',
+    category: 'scarf',
+    description: '传统菠萝花样方巾图解，花样优雅细腻。使用蕾丝线钩织效果最佳，可作为桌布或披肩使用。',
+    file_url: '#',
+    image_url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=300&fit=crop&hue=60',
+  },
+  {
+    title: '安抚兔玩偶视频教程',
+    type: 'video',
+    category: 'doll',
+    description: '超人气安抚兔详细视频教程，适合送给宝宝的礼物。使用有机棉线，安全无害。分3集讲解完成。',
+    video_url: 'https://www.bilibili.com/video/BV1example4',
+    platform: 'bilibili',
+    author: '钩织妈妈',
+    image_url: 'https://images.unsplash.com/photo-1585399000684-d2f72660f092?w=400&h=300&fit=crop',
+  },
+  {
+    title: '北欧风杯垫套装图解',
+    type: 'pattern',
+    category: 'other',
+    description: '六款北欧几何风格杯垫图解，简约大方。使用棉线钩织，可作为家居装饰或伴手礼。',
+    file_url: '#',
+    image_url: 'https://images.unsplash.com/photo-1556911220-bff31c812dba?w=400&h=300&fit=crop',
+  },
+  {
+    title: '斜挎手机包编织教程',
+    type: 'video',
+    category: 'bag',
+    description: '实用斜挎手机包教程，含链条带制作方法。小巧精致，出门只带手机时非常方便！',
+    video_url: 'https://www.bilibili.com/video/BV1example5',
+    platform: 'bilibili',
+    author: '时尚编织坊',
+    image_url: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=300&fit=crop&hue=180',
+  },
+  {
+    title: '婴儿毯拼花图解合集',
+    type: 'pattern',
+    category: 'blanket',
+    description: '5种花片拼接而成的婴儿毯图解，含花片钩法和拼接方法。柔软棉线材质，给宝宝最温柔的呵护。',
+    file_url: '#',
+    image_url: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=400&h=300&fit=crop',
+  },
 ]
 
-const insertResource = db.prepare('INSERT INTO resources (title, type, category, description, image_url, file_url, video_url, platform) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
+const insertResource = db.prepare('INSERT INTO resources (title, type, category, description, image_url, file_url, video_url, platform, author) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')
 for (const r of resources) {
-  insertResource.run(r.title, r.type, r.category, r.description, r.image_url || null, r.file_url || null, r.video_url || null, r.platform || null)
+  insertResource.run(r.title, r.type, r.category, r.description, r.image_url || null, r.file_url || null, r.video_url || null, r.platform || null, r.author || null)
 }
 
 // Seed forum posts
