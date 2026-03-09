@@ -2,9 +2,17 @@
   <nav class="navbar">
     <div class="container">
       <router-link to="/" class="navbar-brand">
-        <span>🧶</span> 织趣社区
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"/>
+          <circle cx="12" cy="12" r="3" fill="currentColor"/>
+        </svg>
+        织趣社区
       </router-link>
-      <button class="mobile-toggle" @click="menuOpen = !menuOpen">☰</button>
+      <button class="mobile-toggle" @click="menuOpen = !menuOpen">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
       <ul class="navbar-nav" :class="{ open: menuOpen }">
         <li><router-link to="/" @click="menuOpen = false">首页</router-link></li>
         <li><router-link to="/products" @click="menuOpen = false">产品库</router-link></li>
@@ -12,7 +20,13 @@
         <li><router-link to="/forum" @click="menuOpen = false">讨论区</router-link></li>
         <li>
           <button class="theme-toggle" @click="toggleTheme" :title="isDark ? '切换到亮色模式' : '切换到护眼模式'">
-            {{ isDark ? '☀️' : '🌙' }}
+            <svg v-if="!isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"/>
+            </svg>
+            <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="5" fill="currentColor"/>
+              <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
           </button>
         </li>
       </ul>

@@ -2,7 +2,16 @@
   <div class="card resource-card">
     <div class="card-header" :class="resource.type === 'pattern' ? 'header-pattern' : 'header-video'">
       <div class="resource-icon">
-        {{ resource.type === 'pattern' ? '📐' : '🎬' }}
+        <svg v-if="resource.type === 'pattern'" width="72" height="72" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M3 8h18M8 3v18" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M16 8l-8 8M8 8l8 8" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+        </svg>
+        <svg v-else width="72" height="72" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M10 9l6 3-6 3V9z" fill="currentColor"/>
+        </svg>
       </div>
       <span v-if="resource.platform" class="source-badge">
         {{ platformLabel }}
@@ -86,9 +95,13 @@ function handleJump(url) {
 }
 
 .resource-icon {
-  font-size: 4.5rem;
   line-height: 1;
-  opacity: 0.9;
+  opacity: 0.8;
+  color: var(--primary-dark);
+}
+
+.resource-icon svg {
+  display: block;
 }
 
 .source-badge {
