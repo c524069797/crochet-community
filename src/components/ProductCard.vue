@@ -1,12 +1,13 @@
 <template>
   <router-link :to="`/products/${product.id}`" class="card product-card" style="text-decoration:none;color:inherit">
-    <div class="card-img" :style="{ background: product.image_url ? `url(${product.image_url}) center/cover` : gradient }">
+    <div class="card-header" :class="product.category === 'yarn' ? 'header-yarn' : 'header-hook'">
+      <div class="category-icon">{{ product.category === 'yarn' ? '🧶' : '🪡' }}</div>
       <span v-if="product.rank && product.rank > 0" class="rank-badge" :class="rankClass">
         TOP {{ product.rank }}
       </span>
     </div>
     <div class="card-body">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px">
         <span class="tag" :class="product.category === 'yarn' ? 'tag-pink' : 'tag-purple'">
           {{ product.category === 'yarn' ? '毛线' : '钩针' }}
         </span>
@@ -26,8 +27,7 @@
 <script setup>
 import { computed } from 'vue'
 const props = defineProps({ product: Object })
-const colors = ['#E8A0BF','#BA90C6','#C0DBEA','#F5D5C8','#B5E8CC']
-const gradient = `linear-gradient(135deg, ${colors[props.product.id % 5]}, ${colors[(props.product.id + 2) % 5]})`
+
 const rankClass = computed(() => {
   const r = props.product.rank
   if (r === 1) return 'rank-gold'
@@ -39,49 +39,105 @@ const rankClass = computed(() => {
 
 <style scoped>
 .product-card {
-  transition: transform 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
+
 .product-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 }
-.card-img {
+
+.card-header {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  border-radius: 16px 16px 0 0;
 }
+
+.header-yarn {
+  background: linear-gradient(135deg, #FFE5F0 0%, #FFD4E5 100%);
+}
+
+.header-hook {
+  background: linear-gradient(135deg, #F5E8FF 0%, #E5D4F5 100%);
+}
+
+.category-icon {
+  font-size: 4rem;
+  line-height: 1;
+  opacity: 0.9;
+}
+
 .rank-badge {
   position: absolute;
-  top: 0;
-  left: 0;
-  padding: 4px 12px;
+  top: 12px;
+  right: 12px;
+  padding: 6px 14px;
   font-size: 0.75rem;
   font-weight: 700;
   color: #fff;
-  border-radius: 12px 0 8px 0;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
-.rank-gold { background: linear-gradient(135deg, #f7971e, #ffd200); }
-.rank-silver { background: linear-gradient(135deg, #8e9eab, #c3cfe2); }
-.rank-bronze { background: linear-gradient(135deg, #c9702e, #e8a87c); }
-.rank-normal { background: rgba(0,0,0,0.5); }
+
+.rank-gold {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
+.rank-silver {
+  background: linear-gradient(135deg, #C0C0C0, #A8A8A8);
+}
+
+.rank-bronze {
+  background: linear-gradient(135deg, #CD7F32, #B8733E);
+}
+
+.rank-normal {
+  background: rgba(0,0,0,0.5);
+}
+
 .recommend-tag {
-  font-size: 0.75rem;
-  color: #e8a0bf;
-  background: #fdf2f8;
-  padding: 4px 8px;
-  border-radius: 4px;
-  margin: 4px 0 8px;
-  line-height: 1.4;
+  font-size: 0.8rem;
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  padding: 6px 12px;
+  border-radius: 12px;
+  margin: 8px 0;
+  line-height: 1.5;
+  font-weight: 500;
 }
+
 .card-footer {
-  margin-top: 10px;
+  margin-top: 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-soft);
 }
+
 .price {
   font-weight: 600;
   color: var(--primary-dark);
+  font-size: 1.05rem;
 }
+
 .review-count {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
+}
+
+@media (max-width: 480px) {
+  .card-header {
+    height: 100px;
+  }
+
+  .category-icon {
+    font-size: 3rem;
+  }
 }
 </style>

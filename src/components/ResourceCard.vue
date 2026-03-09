@@ -1,15 +1,15 @@
 <template>
-  <div class="card">
-    <div class="card-img" :style="{ background: resource.image_url ? `url(${resource.image_url}) center/cover` : gradient }">
-      <div v-if="resource.type === 'video'" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.2)">
-        <span style="font-size:3rem">▶</span>
+  <div class="card resource-card">
+    <div class="card-header" :class="resource.type === 'pattern' ? 'header-pattern' : 'header-video'">
+      <div class="resource-icon">
+        {{ resource.type === 'pattern' ? '📐' : '🎬' }}
       </div>
       <span v-if="resource.platform" class="source-badge">
         {{ platformLabel }}
       </span>
     </div>
     <div class="card-body">
-      <div style="display:flex;gap:8px;margin-bottom:10px">
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
         <span class="tag" :class="resource.type === 'pattern' ? 'tag-pink' : 'tag-blue'">
           {{ resource.type === 'pattern' ? '图解' : '视频' }}
         </span>
@@ -36,8 +36,6 @@
 const props = defineProps({ resource: Object })
 const categoryMap = { doll: '玩偶', scarf: '围巾', bag: '包包', hat: '帽子', blanket: '毯子', other: '其他' }
 const categoryLabel = categoryMap[props.resource.category] || props.resource.category
-const colors = ['#C0DBEA','#E8A0BF','#BA90C6','#F5D5C8','#B5E8CC']
-const gradient = `linear-gradient(135deg, ${colors[props.resource.id % 5]}, ${colors[(props.resource.id + 3) % 5]})`
 
 const platformMap = { bilibili: 'B站', xiaohongshu: '小红书', douyin: '抖音' }
 const platformLabel = platformMap[props.resource.platform] || props.resource.platform || ''
@@ -53,46 +51,82 @@ function handleJump(url) {
 </script>
 
 <style scoped>
-.card-img { position: relative; }
+.resource-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 16px 16px 0 0;
+}
+
+.header-pattern {
+  background: linear-gradient(135deg, #FFE5F0 0%, #FFD4E5 100%);
+}
+
+.header-video {
+  background: linear-gradient(135deg, #E5F4FF 0%, #D4EEF7 100%);
+}
+
+.resource-icon {
+  font-size: 4.5rem;
+  line-height: 1;
+  opacity: 0.9;
+}
+
 .source-badge {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 12px;
+  right: 12px;
   background: rgba(0,0,0,0.6);
   color: #fff;
   font-size: 0.75rem;
-  padding: 2px 8px;
-  border-radius: 4px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 500;
 }
+
 .author-info {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin: 6px 0 8px;
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  gap: 8px;
+  margin: 8px 0 10px;
+  font-size: 0.85rem;
 }
+
 .platform-label {
   color: var(--primary-dark);
   font-weight: 500;
 }
+
 .author-name {
   color: var(--text-light);
 }
+
 .card-actions {
-  margin-top: 12px;
+  margin-top: 16px;
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.source-text {
-  font-size: 0.75rem;
-  color: #999;
-}
 
 @media (max-width: 480px) {
+  .card-header {
+    height: 120px;
+  }
+
+  .resource-icon {
+    font-size: 3.5rem;
+  }
+
   .author-info {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 }
 </style>
