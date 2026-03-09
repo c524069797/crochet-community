@@ -1,27 +1,27 @@
 /* ========== CSS Variables ========== */
 :root {
-  /* 更柔和的女性化配色 */
-  --primary: #F4A6C3;
-  --primary-dark: #E88AAD;
-  --primary-light: #FFD4E5;
-  --secondary: #C9A9E0;
-  --secondary-light: #E5D4F5;
-  --accent: #A8D8EA;
-  --accent-light: #D4EEF7;
-  --bg: #FFF9FB;
+  /* 清新优雅的配色 - 薄荷绿+淡紫+米白 */
+  --primary: #9DCFB7;
+  --primary-dark: #7AB89D;
+  --primary-light: #D4EDE4;
+  --secondary: #B8A9D6;
+  --secondary-light: #E5DFF5;
+  --accent: #F5D5A8;
+  --accent-light: #FFF4E0;
+  --bg: #FDFCFA;
   --bg-card: #FFFFFF;
-  --bg-soft: #FFF5F8;
-  --text: #5A4A52;
-  --text-light: #8A7A82;
-  --text-muted: #B5A5AD;
-  --border: #F5E8ED;
-  --border-soft: #FCEEF3;
+  --bg-soft: #F8F6F3;
+  --text: #4A4A4A;
+  --text-light: #7A7A7A;
+  --text-muted: #ABABAB;
+  --border: #EAE8E5;
+  --border-soft: #F5F3F0;
 
   /* 柔和阴影 */
-  --shadow-sm: 0 2px 8px rgba(244, 166, 195, 0.08);
-  --shadow: 0 4px 16px rgba(244, 166, 195, 0.12);
-  --shadow-hover: 0 8px 24px rgba(244, 166, 195, 0.18);
-  --shadow-focus: 0 0 0 4px rgba(244, 166, 195, 0.15);
+  --shadow-sm: 0 2px 8px rgba(157, 207, 183, 0.08);
+  --shadow: 0 4px 16px rgba(157, 207, 183, 0.12);
+  --shadow-hover: 0 8px 24px rgba(157, 207, 183, 0.18);
+  --shadow-focus: 0 0 0 4px rgba(157, 207, 183, 0.15);
 
   /* 更圆润的圆角 */
   --radius: 16px;
@@ -36,27 +36,27 @@
 /* ========== 暗色模式（护眼模式）========== */
 [data-theme="dark"] {
   /* 暗色护眼配色 */
-  --primary: #E88AAD;
-  --primary-dark: #F4A6C3;
-  --primary-light: #5A3A4A;
-  --secondary: #B89DD6;
-  --secondary-light: #4A3A5A;
-  --accent: #8AC4D8;
-  --accent-light: #3A4A5A;
-  --bg: #1A1418;
-  --bg-card: #2A1E24;
-  --bg-soft: #3A2A32;
-  --text: #E8D8E0;
-  --text-light: #C8B8C0;
-  --text-muted: #A89098;
-  --border: #4A3A42;
-  --border-soft: #3A2A32;
+  --primary: #7AB89D;
+  --primary-dark: #9DCFB7;
+  --primary-light: #3A4A42;
+  --secondary: #A89BC6;
+  --secondary-light: #3A3A4A;
+  --accent: #D5BC8A;
+  --accent-light: #4A4A3A;
+  --bg: #1E1E1E;
+  --bg-card: #2A2A2A;
+  --bg-soft: #353535;
+  --text: #E0E0E0;
+  --text-light: #B8B8B8;
+  --text-muted: #909090;
+  --border: #404040;
+  --border-soft: #353535;
 
   /* 暗色阴影 */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --shadow-focus: 0 0 0 4px rgba(232, 138, 173, 0.2);
+  --shadow-focus: 0 0 0 4px rgba(122, 184, 157, 0.2);
 }
 
 /* ========== Reset & Base ========== */
@@ -208,7 +208,7 @@ button, input, textarea, select {
 
 /* ========== Hero Section ========== */
 .hero {
-  background: linear-gradient(135deg, #FFE5F0 0%, #F5E8FF 50%, #E5F4FF 100%);
+  background: linear-gradient(135deg, #E8F5F0 0%, #EDE8F5 50%, #FFF4E0 100%);
   padding: 100px 24px 80px;
   text-align: center;
   color: var(--text);
@@ -217,7 +217,7 @@ button, input, textarea, select {
 }
 
 [data-theme="dark"] .hero {
-  background: linear-gradient(135deg, #3A2A32 0%, #3A2A3A 50%, #2A3A42 100%);
+  background: linear-gradient(135deg, #2A3A32 0%, #2A2A3A 50%, #3A3A2A 100%);
 }
 
 .hero::before {
@@ -227,12 +227,12 @@ button, input, textarea, select {
   right: -10%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(244, 166, 195, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(157, 207, 183, 0.12) 0%, transparent 70%);
   border-radius: 50%;
 }
 
 [data-theme="dark"] .hero::before {
-  background: radial-gradient(circle, rgba(232, 138, 173, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(122, 184, 157, 0.08) 0%, transparent 70%);
 }
 
 .hero::after {
@@ -242,12 +242,12 @@ button, input, textarea, select {
   left: -5%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(201, 169, 224, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(184, 169, 214, 0.1) 0%, transparent 70%);
   border-radius: 50%;
 }
 
 [data-theme="dark"] .hero::after {
-  background: radial-gradient(circle, rgba(184, 157, 214, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(168, 155, 198, 0.06) 0%, transparent 70%);
 }
 
 .hero h1 {

@@ -59,11 +59,11 @@ const rankClass = computed(() => {
 }
 
 .header-yarn {
-  background: linear-gradient(135deg, #FFE5F0 0%, #FFD4E5 100%);
+  background: linear-gradient(135deg, #D4EDE4 0%, #E8F5F0 100%);
 }
 
 .header-hook {
-  background: linear-gradient(135deg, #F5E8FF 0%, #E5D4F5 100%);
+  background: linear-gradient(135deg, #E5DFF5 0%, #EDE8F5 100%);
 }
 
 .category-icon {

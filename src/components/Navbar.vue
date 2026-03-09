@@ -44,22 +44,25 @@ function toggleTheme() {
 
 <style scoped>
 .theme-toggle {
-  background: none;
-  border: none;
-  font-size: 1.3rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  font-size: 1.1rem;
   cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 20px;
+  padding: 8px 16px;
+  border-radius: 24px;
   transition: var(--transition);
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--text);
 }
 
 .theme-toggle:hover {
-  background: var(--bg-soft);
-  transform: scale(1.1);
+  background: var(--primary-light);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 @media (max-width: 768px) {

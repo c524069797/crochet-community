@@ -78,11 +78,11 @@ function handleJump(url) {
 }
 
 .header-pattern {
-  background: linear-gradient(135deg, #FFE5F0 0%, #FFD4E5 100%);
+  background: linear-gradient(135deg, #D4EDE4 0%, #E8F5F0 100%);
 }
 
 .header-video {
-  background: linear-gradient(135deg, #E5F4FF 0%, #D4EEF7 100%);
+  background: linear-gradient(135deg, #FFF4E0 0%, #FFF8E8 100%);
 }
 
 .resource-icon {
