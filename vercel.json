@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://api.zhiqu.clczl.asia/api/$1"
+    },
+    {
+      "source": "/uploads/(.*)",
+      "destination": "https://api.zhiqu.clczl.asia/uploads/$1"
+    },
+    {
+      "source": "/images/(.*)",
+      "destination": "https://api.zhiqu.clczl.asia/images/$1"
+    }
+  ]
+}
