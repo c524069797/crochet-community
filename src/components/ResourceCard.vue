@@ -1,17 +1,9 @@
 <template>
   <div class="card resource-card">
     <div class="card-header" :class="resource.type === 'pattern' ? 'header-pattern' : 'header-video'">
-      <div class="resource-icon">
-        <svg v-if="resource.type === 'pattern'" width="72" height="72" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
-          <path d="M3 8h18M8 3v18" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
-          <path d="M16 8l-8 8M8 8l8 8" stroke="currentColor" stroke-width="1" opacity="0.4"/>
-        </svg>
-        <svg v-else width="72" height="72" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
-          <path d="M10 9l6 3-6 3V9z" fill="currentColor"/>
-        </svg>
+      <img v-if="resource.image_url" :src="resource.image_url" :alt="resource.title" class="resource-image" />
+      <div v-else class="resource-icon">
+        {{ resource.type === 'pattern' ? '📐' : '🎬' }}
       </div>
       <span v-if="resource.platform" class="source-badge">
         {{ platformLabel }}
@@ -84,6 +76,13 @@ function handleJump(url) {
   justify-content: center;
   position: relative;
   border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+.resource-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .header-pattern {

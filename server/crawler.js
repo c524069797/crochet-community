@@ -81,8 +81,8 @@ async function crawl() {
   console.log(`数据库中已有 ${existing.size} 条B站资源\n`)
 
   const insert = db.prepare(`
-    INSERT INTO resources (title, type, category, description, image_url, file_url, video_url, platform)
-    VALUES (?, 'video', ?, ?, ?, NULL, ?, 'bilibili')
+    INSERT INTO resources (title, type, category, description, image_url, file_url, video_url, platform, author)
+    VALUES (?, 'video', ?, ?, ?, NULL, ?, 'bilibili', ?)
   `)
 
   let totalNew = 0
@@ -102,7 +102,8 @@ async function crawl() {
         category,
         v.description || `${v.author} 的钩织教程视频`,
         v.image_url,
-        v.video_url
+        v.video_url,
+        v.author
       )
       newCount++
     }

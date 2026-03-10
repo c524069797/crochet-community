@@ -1,18 +1,9 @@
 <template>
   <router-link :to="`/products/${product.id}`" class="card product-card" style="text-decoration:none;color:inherit">
     <div class="card-header" :class="product.category === 'yarn' ? 'header-yarn' : 'header-hook'">
-      <div class="category-icon">
-        <svg v-if="product.category === 'yarn'" width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5" fill="none"/>
-          <path d="M12 4c-2 2-4 4-4 8s2 6 4 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M12 4c2 2 4 4 4 8s-2 6-4 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <ellipse cx="12" cy="12" rx="4" ry="8" stroke="currentColor" stroke-width="1.5" fill="none"/>
-        </svg>
-        <svg v-else width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
-          <circle cx="12" cy="12" r="2" fill="currentColor"/>
-        </svg>
+      <img v-if="product.image_url" :src="product.image_url" :alt="product.name" class="product-image" />
+      <div v-else class="category-icon">
+        {{ product.category === 'yarn' ? '🧶' : '🪡' }}
       </div>
       <span v-if="product.rank && product.rank > 0" class="rank-badge" :class="rankClass">
         TOP {{ product.rank }}
@@ -68,6 +59,13 @@ const rankClass = computed(() => {
   justify-content: center;
   position: relative;
   border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .header-yarn {
