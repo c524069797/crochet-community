@@ -19,6 +19,42 @@ app.use(express.json())
 const db = initDB()
 app.locals.db = db
 
+// Image proxy for remote images (Bilibili thumbnails etc.)
+// Bypasses hotlink protection, caches in browser for 7 days
+app.get('/api/image-proxy', async (req, res) => {
+  const url = req.query.url
+  if (!url || (!url.startsWith('https://') && !url.startsWith('http://'))) {
+    return res.status(400).json({ error: 'Invalid URL' })
+  }
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+        'Referer': new URL(url).origin + '/',
+        'Accept': 'image/*,*/*',
+      },
+      signal: AbortSignal.timeout(8000),
+    })
+
+    if (!response.ok) {
+      return res.status(response.status).json({ error: 'Failed to fetch image' })
+    }
+
+    const contentType = response.headers.get('content-type') || 'image/jpeg'
+    const buffer = Buffer.from(await response.arrayBuffer())
+
+    res.set({
+      'Content-Type': contentType,
+      'Cache-Control': 'public, max-age=604800, immutable',
+      'X-Image-Proxy': 'true',
+    })
+    res.send(buffer)
+  } catch (err) {
+    res.status(502).json({ error: 'Image proxy failed: ' + err.message })
+  }
+})
+
 // API routes
 app.use('/api/products', productsRouter)
 app.use('/api/resources', resourcesRouter)

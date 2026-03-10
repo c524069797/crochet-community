@@ -1,7 +1,7 @@
 <template>
   <div class="card resource-card">
     <div class="card-header" :class="resource.type === 'pattern' ? 'header-pattern' : 'header-video'">
-      <img v-if="resource.image_url" :src="resource.image_url" :alt="resource.title" class="resource-image" />
+      <img v-if="resource.image_url" :src="proxyImg(resource.image_url)" :alt="resource.title" class="resource-image" />
       <div v-else class="resource-icon">
         {{ resource.type === 'pattern' ? '📐' : '🎬' }}
       </div>
@@ -38,6 +38,12 @@
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const props = defineProps({ resource: Object })
+
+function proxyImg(url) {
+  if (!url) return ''
+  if (url.startsWith('/')) return url
+  return '/api/image-proxy?url=' + encodeURIComponent(url)
+}
 
 const categoryKeys = { doll: 'doll', scarf: 'scarf', bag: 'bag', hat: 'hat', blanket: 'blanket', other: 'other' }
 const categoryLabel = categoryKeys[props.resource.category]

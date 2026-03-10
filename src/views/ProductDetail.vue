@@ -2,7 +2,7 @@
   <div class="container" v-if="product">
     <div class="product-detail">
       <div class="product-detail-img">
-        <div :style="{ height: '400px', borderRadius: '16px', background: product.image_url ? `url(${product.image_url}) center/cover` : gradient, position: 'relative' }">
+        <div :style="{ height: '400px', borderRadius: '16px', background: product.image_url ? `url(${proxyImg(product.image_url)}) center/cover` : gradient, position: 'relative' }">
           <span v-if="product.rank && product.rank > 0" class="detail-rank" :class="rankClass">
             TOP {{ product.rank }}
           </span>
@@ -54,6 +54,12 @@ const { t } = useI18n()
 const route = useRoute()
 const product = ref(null)
 const links = ref([])
+
+function proxyImg(url) {
+  if (!url) return ''
+  if (url.startsWith('/')) return url
+  return '/api/image-proxy?url=' + encodeURIComponent(url)
+}
 
 const colors = ['#4A7C59','#8B6F47','#D4A574','#7C9885','#B5C4A3']
 const gradient = `linear-gradient(135deg, ${colors[0]}, ${colors[2]})`

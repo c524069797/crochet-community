@@ -1,7 +1,7 @@
 <template>
   <router-link :to="`/products/${product.id}`" class="card product-card" style="text-decoration:none;color:inherit">
     <div class="card-header" :class="product.category === 'yarn' ? 'header-yarn' : 'header-hook'">
-      <img v-if="product.image_url" :src="product.image_url" :alt="product.name" class="product-image" />
+      <img v-if="product.image_url" :src="proxyImg(product.image_url)" :alt="product.name" class="product-image" />
       <div v-else class="category-icon">
         {{ product.category === 'yarn' ? '🧶' : '🪡' }}
       </div>
@@ -30,6 +30,12 @@
 <script setup>
 import { computed } from 'vue'
 const props = defineProps({ product: Object })
+
+function proxyImg(url) {
+  if (!url) return ''
+  if (url.startsWith('/')) return url
+  return '/api/image-proxy?url=' + encodeURIComponent(url)
+}
 
 const rankClass = computed(() => {
   const r = props.product.rank
