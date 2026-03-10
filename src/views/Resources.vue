@@ -1,36 +1,40 @@
 <template>
   <div class="container">
     <div class="page-header">
-      <h1>资源库</h1>
-      <p>图解教程与视频教学，助你提升钩织技能</p>
+      <h1>{{ $t('resources.title') }}</h1>
+      <p>{{ $t('resources.subtitle') }}</p>
     </div>
 
     <div class="third-party-notice">
       <span class="notice-icon">ℹ️</span>
-      <span>本页面部分资源来自第三方平台（B站等），点击将跳转至原始网站。本站仅提供索引服务，不存储任何第三方内容，相关权利归原作者所有。</span>
+      <span>{{ $t('resources.thirdPartyNotice') }}</span>
     </div>
 
     <div class="tab-bar">
-      <button class="tab-btn" :class="{ active: tab === 'all' }" @click="tab = 'all'">全部</button>
-      <button class="tab-btn" :class="{ active: tab === 'pattern' }" @click="tab = 'pattern'">📖 图解</button>
-      <button class="tab-btn" :class="{ active: tab === 'video' }" @click="tab = 'video'">🎬 视频</button>
+      <button class="tab-btn" :class="{ active: tab === 'all' }" @click="tab = 'all'">{{ $t('resources.all') }}</button>
+      <button class="tab-btn" :class="{ active: tab === 'pattern' }" @click="tab = 'pattern'">📖 {{ $t('resources.pattern') }}</button>
+      <button class="tab-btn" :class="{ active: tab === 'video' }" @click="tab = 'video'">🎬 {{ $t('resources.video') }}</button>
     </div>
 
     <div class="filter-bar">
-      <button class="filter-btn" :class="{ active: category === '' }" @click="category = ''">全部分类</button>
-      <button class="filter-btn" :class="{ active: category === 'doll' }" @click="category = 'doll'">玩偶</button>
-      <button class="filter-btn" :class="{ active: category === 'scarf' }" @click="category = 'scarf'">围巾</button>
-      <button class="filter-btn" :class="{ active: category === 'bag' }" @click="category = 'bag'">包包</button>
-      <button class="filter-btn" :class="{ active: category === 'hat' }" @click="category = 'hat'">帽子</button>
-      <button class="filter-btn" :class="{ active: category === 'blanket' }" @click="category = 'blanket'">毯子</button>
+      <button class="filter-btn" :class="{ active: category === '' }" @click="category = ''">{{ $t('resources.allCategories') }}</button>
+      <button class="filter-btn" :class="{ active: category === 'doll' }" @click="category = 'doll'">{{ $t('resources.doll') }}</button>
+      <button class="filter-btn" :class="{ active: category === 'scarf' }" @click="category = 'scarf'">{{ $t('resources.scarf') }}</button>
+      <button class="filter-btn" :class="{ active: category === 'bag' }" @click="category = 'bag'">{{ $t('resources.bag') }}</button>
+      <button class="filter-btn" :class="{ active: category === 'hat' }" @click="category = 'hat'">{{ $t('resources.hat') }}</button>
+      <button class="filter-btn" :class="{ active: category === 'blanket' }" @click="category = 'blanket'">{{ $t('resources.blanket') }}</button>
     </div>
 
     <div class="grid grid-3" v-if="filtered.length">
       <ResourceCard v-for="r in filtered" :key="r.id" :resource="r" />
     </div>
+    <div v-else-if="loadError" class="empty-state">
+      <span>⚠️</span>
+      <p>{{ $t('resources.loadFailed') }}</p>
+    </div>
     <div v-else class="empty-state">
       <span>📚</span>
-      <p>暂无相关资源</p>
+      <p>{{ $t('resources.empty') }}</p>
     </div>
   </div>
 </template>
@@ -42,6 +46,7 @@ import ResourceCard from '../components/ResourceCard.vue'
 const resources = ref([])
 const tab = ref('all')
 const category = ref('')
+const loadError = ref(false)
 
 const filtered = computed(() => {
   let list = resources.value
@@ -51,8 +56,17 @@ const filtered = computed(() => {
 })
 
 onMounted(async () => {
-  const res = await fetch('/api/resources')
-  resources.value = await res.json()
+  try {
+    const res = await fetch('/api/resources')
+    if (res.ok) {
+      resources.value = await res.json()
+    } else {
+      loadError.value = true
+    }
+  } catch (err) {
+    console.error('Failed to load resources:', err)
+    loadError.value = true
+  }
 })
 </script>
 
@@ -61,13 +75,13 @@ onMounted(async () => {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  background: #fef9ef;
-  border: 1px solid #f0dca0;
-  border-radius: 8px;
+  background: #FFFBEB;
+  border: 1px solid #F5DCA0;
+  border-radius: 10px;
   padding: 12px 16px;
   margin-bottom: 20px;
   font-size: 0.85rem;
-  color: #8a6d3b;
+  color: #8A6D3B;
   line-height: 1.5;
 }
 .notice-icon {

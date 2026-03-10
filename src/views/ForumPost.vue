@@ -2,9 +2,9 @@
   <div class="container">
     <div class="post-detail" v-if="post">
       <div class="post-detail-header">
-        <router-link to="/forum" style="color:var(--text-muted);font-size:0.9rem">&larr; 返回讨论区</router-link>
+        <router-link to="/forum" style="color:var(--text-muted);font-size:0.9rem">&larr; {{ $t('forum.backToForum') }}</router-link>
         <div style="display:flex;gap:8px;margin:16px 0 12px">
-          <span class="tag" :class="tagClassMap[post.category] || 'tag-pink'">{{ categoryMap[post.category] || '讨论' }}</span>
+          <span class="tag" :class="tagClassMap[post.category] || 'tag-green'">{{ $t(`forum.${post.category}`, $t('forum.discuss')) }}</span>
         </div>
         <h1>{{ post.title }}</h1>
         <div class="post-meta" style="margin-top:8px">
@@ -60,7 +60,7 @@
 
       <!-- Comments -->
       <div class="comments-section">
-        <h3>评论 ({{ comments.length }})</h3>
+        <h3>{{ $t('forum.comments') }} ({{ comments.length }})</h3>
         <div v-for="c in comments" :key="c.id" class="comment-item">
           <div class="comment-meta">
             <span style="font-weight:600;color:var(--text)">{{ c.author_name }}</span>
@@ -68,24 +68,24 @@
           </div>
           <p>{{ c.content }}</p>
         </div>
-        <div v-if="!comments.length" style="color:var(--text-muted);padding:20px;text-align:center">暂无评论</div>
+        <div v-if="!comments.length" style="color:var(--text-muted);padding:20px;text-align:center">{{ $t('forum.noComments') }}</div>
 
         <!-- Comment Form -->
         <div class="comment-form">
-          <h3 style="margin-bottom:16px">发表评论</h3>
+          <h3 style="margin-bottom:16px">{{ $t('forum.postComment') }}</h3>
           <form @submit.prevent="submitComment">
             <div class="form-group">
-              <input v-model="commentForm.author_name" class="form-control" placeholder="你的昵称" required />
+              <input v-model="commentForm.author_name" class="form-control" :placeholder="$t('forum.nicknamePlaceholder')" required />
             </div>
             <div class="form-group">
-              <textarea v-model="commentForm.content" class="form-control" rows="4" placeholder="写下你的评论..." required></textarea>
+              <textarea v-model="commentForm.content" class="form-control" rows="4" :placeholder="$t('forum.commentPlaceholder')" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">提交评论</button>
+            <button type="submit" class="btn btn-primary">{{ $t('forum.submitComment') }}</button>
           </form>
         </div>
       </div>
     </div>
-    <div v-else class="loading" style="padding:80px">加载中...</div>
+    <div v-else class="loading" style="padding:80px">{{ $t('home.loading') }}</div>
   </div>
 </template>
 
@@ -100,8 +100,7 @@ const liked = ref(false)
 const commentForm = ref({ author_name: '', content: '' })
 const viewingImage = ref(null)
 
-const categoryMap = { showcase: '作品展示', help: '问题求助', experience: '经验分享', exchange: '闲置交换' }
-const tagClassMap = { showcase: 'tag-pink', help: 'tag-blue', experience: 'tag-purple', exchange: 'tag-pink' }
+const tagClassMap = { showcase: 'tag-green', help: 'tag-blue', experience: 'tag-purple', exchange: 'tag-pink' }
 
 const postImages = computed(() => {
   if (!post.value?.images) return []

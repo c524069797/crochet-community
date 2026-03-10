@@ -1,31 +1,31 @@
 <template>
   <div class="container">
     <div class="page-header">
-      <h1>产品库</h1>
-      <p>精选钩织工具与材料，找到你心仪的好物</p>
+      <h1>{{ $t('products.title') }}</h1>
+      <p>{{ $t('products.subtitle') }}</p>
     </div>
 
     <div class="filter-bar">
-      <button class="filter-btn" :class="{ active: filter === 'all' }" @click="filter = 'all'; subFilter = ''">全部</button>
-      <button class="filter-btn" :class="{ active: filter === 'yarn' }" @click="filter = 'yarn'; subFilter = ''">毛线</button>
-      <button class="filter-btn" :class="{ active: filter === 'hook' }" @click="filter = 'hook'; subFilter = ''">钩针</button>
+      <button class="filter-btn" :class="{ active: filter === 'all' }" @click="filter = 'all'; subFilter = ''">{{ $t('products.all') }}</button>
+      <button class="filter-btn" :class="{ active: filter === 'yarn' }" @click="filter = 'yarn'; subFilter = ''">{{ $t('products.yarn') }}</button>
+      <button class="filter-btn" :class="{ active: filter === 'hook' }" @click="filter = 'hook'; subFilter = ''">{{ $t('products.hook') }}</button>
     </div>
 
     <div class="filter-bar" v-if="filter === 'yarn'">
-      <button class="filter-btn btn-sm" :class="{ active: subFilter === '' }" @click="subFilter = ''">全部毛线</button>
-      <button class="filter-btn btn-sm" :class="{ active: subFilter === 'cotton' }" @click="subFilter = 'cotton'">棉线</button>
-      <button class="filter-btn btn-sm" :class="{ active: subFilter === 'wool' }" @click="subFilter = 'wool'">羊毛</button>
-      <button class="filter-btn btn-sm" :class="{ active: subFilter === 'acrylic' }" @click="subFilter = 'acrylic'">腈纶</button>
-      <button class="filter-btn btn-sm" :class="{ active: subFilter === 'blend' }" @click="subFilter = 'blend'">混纺</button>
+      <button class="filter-btn btn-sm" :class="{ active: subFilter === '' }" @click="subFilter = ''">{{ $t('products.allYarn') }}</button>
+      <button class="filter-btn btn-sm" :class="{ active: subFilter === 'cotton' }" @click="subFilter = 'cotton'">{{ $t('products.cotton') }}</button>
+      <button class="filter-btn btn-sm" :class="{ active: subFilter === 'wool' }" @click="subFilter = 'wool'">{{ $t('products.wool') }}</button>
+      <button class="filter-btn btn-sm" :class="{ active: subFilter === 'acrylic' }" @click="subFilter = 'acrylic'">{{ $t('products.acrylic') }}</button>
+      <button class="filter-btn btn-sm" :class="{ active: subFilter === 'blend' }" @click="subFilter = 'blend'">{{ $t('products.blend') }}</button>
     </div>
 
-    <!-- 榜单声明 -->
+    <!-- Ranking Notice -->
     <div v-if="filter === 'hook' || filter === 'yarn'" class="ranking-header">
       <div class="ranking-title-row">
-        <h2 class="ranking-title">{{ filter === 'hook' ? '钩针推荐榜' : '毛线推荐榜' }}</h2>
-        <span class="ranking-source">数据来源：小红书社区口碑</span>
+        <h2 class="ranking-title">{{ filter === 'hook' ? $t('products.hookRanking') : $t('products.yarnRanking') }}</h2>
+        <span class="ranking-source">{{ $t('products.rankingSource') }}</span>
       </div>
-      <p class="ranking-desc">基于小红书700万+钩织笔记中的用户评价、推荐频次和口碑综合排名。购买链接将跳转至第三方电商平台，价格以实际页面为准。</p>
+      <p class="ranking-desc">{{ $t('products.rankingDesc') }}</p>
     </div>
 
     <div class="grid" :class="(filter === 'hook' || filter === 'yarn') ? 'grid-3' : 'grid-4'" v-if="filtered.length">
@@ -33,7 +33,7 @@
     </div>
     <div v-else class="empty-state">
       <span>📦</span>
-      <p>暂无相关产品</p>
+      <p>{{ $t('products.empty') }}</p>
     </div>
   </div>
 </template>
@@ -50,7 +50,6 @@ const filtered = computed(() => {
   let list = products.value
   if (filter.value !== 'all') list = list.filter(p => p.category === filter.value)
   if (subFilter.value) list = list.filter(p => p.subcategory === subFilter.value)
-  // 钩针和毛线都按 rank 排序
   if (filter.value === 'hook' || filter.value === 'yarn') {
     list = [...list].sort((a, b) => (a.rank || 999) - (b.rank || 999))
   }
@@ -65,8 +64,8 @@ onMounted(async () => {
 
 <style scoped>
 .ranking-header {
-  background: linear-gradient(135deg, #fdf2f8, #fce7f3, #f3e8ff);
-  border: 1px solid #f0d5e8;
+  background: var(--primary-light);
+  border: 1px solid rgba(74, 124, 89, 0.2);
   border-radius: 12px;
   padding: 20px 24px;
   margin-bottom: 24px;
@@ -81,20 +80,20 @@ onMounted(async () => {
 .ranking-title {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #7c3aed;
+  color: var(--primary-dark);
   margin: 0;
 }
 .ranking-source {
   font-size: 0.75rem;
-  color: #e8a0bf;
+  color: var(--primary);
   background: #fff;
   padding: 2px 10px;
   border-radius: 20px;
-  border: 1px solid #f0d5e8;
+  border: 1px solid rgba(74, 124, 89, 0.2);
 }
 .ranking-desc {
   font-size: 0.82rem;
-  color: #8a6d7b;
+  color: var(--text-light);
   margin: 0;
   line-height: 1.6;
 }

@@ -1,7 +1,5 @@
 import { initDB } from './database.js'
 
-const db = initDB()
-
 // B站搜索关键词 → 资源分类映射
 const searchQueries = [
   { keyword: '钩针玩偶教程', category: 'doll' },
@@ -29,51 +27,71 @@ function fixImageUrl(url) {
   return url
 }
 
-// 延时函数，避免请求过快
+// 延时函数
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-// 从B站搜索API抓取视频数据
-async function fetchBilibiliVideos(keyword, page = 1) {
+// 从B站搜索API抓取视频数据（带重试）
+async function fetchBilibiliVideos(keyword, page = 1, retries = 3) {
   const url = `https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword=${encodeURIComponent(keyword)}&page=${page}&page_size=20`
 
   const headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     'Referer': 'https://search.bilibili.com',
+    'Accept': 'application/json, text/plain, */*',
+    'Accept-Language': 'zh-CN,zh;q=0.9',
   }
 
-  try {
-    const res = await fetch(url, { headers })
-    const json = await res.json()
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(url, { headers, signal: AbortSignal.timeout(10000) })
+      const text = await res.text()
 
-    if (json.code !== 0) {
-      console.error(`  API error for "${keyword}": ${json.message}`)
+      // 检查是否返回了 HTML（风控页面）而非 JSON
+      if (text.startsWith('<!DOCTYPE') || text.startsWith('<html')) {
+        console.warn(`  [尝试 ${attempt}/${retries}] "${keyword}" 触发风控，返回HTML页面`)
+        if (attempt < retries) {
+          await sleep(3000 * attempt) // 指数退避
+          continue
+        }
+        return []
+      }
+
+      const json = JSON.parse(text)
+
+      if (json.code !== 0) {
+        console.error(`  API error for "${keyword}": ${json.message}`)
+        return []
+      }
+
+      const results = json.data?.result || []
+      return results.map(item => ({
+        title: stripHtml(item.title),
+        description: stripHtml(item.description),
+        image_url: fixImageUrl(item.pic),
+        video_url: `https://www.bilibili.com/video/${item.bvid}`,
+        bvid: item.bvid,
+        author: item.author,
+        play: item.play,
+        duration: item.duration,
+      }))
+    } catch (err) {
+      console.error(`  [尝试 ${attempt}/${retries}] Fetch error for "${keyword}": ${err.message}`)
+      if (attempt < retries) {
+        await sleep(2000 * attempt)
+        continue
+      }
       return []
     }
-
-    const results = json.data?.result || []
-    return results.map(item => ({
-      title: stripHtml(item.title),
-      description: stripHtml(item.description),
-      image_url: fixImageUrl(item.pic),
-      video_url: `https://www.bilibili.com/video/${item.bvid}`,
-      bvid: item.bvid,
-      author: item.author,
-      play: item.play,
-      duration: item.duration,
-    }))
-  } catch (err) {
-    console.error(`  Fetch error for "${keyword}": ${err.message}`)
-    return []
   }
+  return []
 }
 
-// 主爬取流程
-async function crawl() {
+// 可导出的爬取函数，接受 db 实例
+export async function crawlBilibili(db) {
   console.log('=== B站钩织资源爬取开始 ===\n')
 
-  // 查询已有的 video_url 用于去重
   const existing = new Set(
     db.prepare('SELECT video_url FROM resources WHERE platform = ?').all('bilibili')
       .map(r => r.video_url)
@@ -111,15 +129,20 @@ async function crawl() {
     totalNew += newCount
     console.log(`  获取 ${videos.length} 条结果，新增 ${newCount} 条\n`)
 
-    // 请求间隔，避免触发限流
-    await sleep(1500)
+    // 请求间隔，避免触发限流（增大到2秒）
+    await sleep(2000)
   }
 
   console.log(`=== 爬取完成，共新增 ${totalNew} 条资源 ===`)
-  db.close()
+  return totalNew
 }
 
-crawl().catch(err => {
-  console.error('爬取失败:', err)
-  process.exit(1)
-})
+// 直接运行时的入口
+const isDirectRun = process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, '/'))
+if (isDirectRun) {
+  const db = initDB()
+  crawlBilibili(db).then(() => db.close()).catch(err => {
+    console.error('爬取失败:', err)
+    process.exit(1)
+  })
+}

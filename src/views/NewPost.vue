@@ -1,38 +1,38 @@
 <template>
   <div class="container">
     <div class="form-card" v-if="!submitted">
-      <h2 style="margin-bottom:24px">发布新帖</h2>
+      <h2 style="margin-bottom:24px">{{ $t('newPost.title') }}</h2>
       <form @submit.prevent="submit">
         <div class="form-group">
-          <label>昵称</label>
-          <input v-model="form.author_name" class="form-control" placeholder="输入你的昵称" required />
+          <label>{{ $t('newPost.nickname') }}</label>
+          <input v-model="form.author_name" class="form-control" :placeholder="$t('newPost.nicknamePlaceholder')" required />
         </div>
         <div class="form-group">
-          <label>分类</label>
+          <label>{{ $t('newPost.categoryLabel') }}</label>
           <select v-model="form.category" class="form-control" required>
-            <option value="">请选择分类</option>
-            <option value="showcase">作品展示</option>
-            <option value="help">问题求助</option>
-            <option value="experience">经验分享</option>
-            <option value="exchange">闲置交换</option>
+            <option value="">{{ $t('newPost.categoryPlaceholder') }}</option>
+            <option value="showcase">{{ $t('forum.showcase') }}</option>
+            <option value="help">{{ $t('forum.help') }}</option>
+            <option value="experience">{{ $t('forum.experience') }}</option>
+            <option value="exchange">{{ $t('forum.exchange') }}</option>
           </select>
         </div>
         <div class="form-group">
-          <label>标题</label>
-          <input v-model="form.title" class="form-control" placeholder="帖子标题" required />
+          <label>{{ $t('newPost.postTitle') }}</label>
+          <input v-model="form.title" class="form-control" :placeholder="$t('newPost.postTitlePlaceholder')" required />
         </div>
         <div class="form-group">
-          <label>内容</label>
-          <textarea v-model="form.content" class="form-control" rows="8" placeholder="分享你的想法..." required></textarea>
+          <label>{{ $t('newPost.content') }}</label>
+          <textarea v-model="form.content" class="form-control" rows="8" :placeholder="$t('newPost.contentPlaceholder')" required></textarea>
         </div>
 
         <!-- 图片上传 -->
         <div class="form-group">
-          <label>图片（最多9张）</label>
+          <label>{{ $t('newPost.images') }}</label>
           <div class="image-upload-area">
             <div class="image-preview-grid">
               <div v-for="(preview, index) in imagePreviews" :key="index" class="image-preview-item">
-                <img :src="preview" alt="预览图" />
+                <img :src="preview" :alt="$t('newPost.preview')" />
                 <button type="button" class="remove-image-btn" @click="removeImage(index)">×</button>
               </div>
               <label v-if="imagePreviews.length < 9" class="image-upload-btn">
@@ -45,31 +45,31 @@
                   style="display: none"
                 />
                 <div class="upload-icon">📷</div>
-                <div class="upload-text">添加图片</div>
+                <div class="upload-text">{{ $t('newPost.addImage') }}</div>
               </label>
             </div>
-            <p class="upload-hint">支持 JPG、PNG、GIF、WebP 格式，单张最大 5MB</p>
+            <p class="upload-hint">{{ $t('newPost.imageHint') }}</p>
           </div>
         </div>
 
         <button type="submit" class="btn btn-primary" :disabled="uploading" style="width:100%">
-          {{ uploading ? '发布中...' : '发布' }}
+          {{ uploading ? $t('newPost.publishing') : $t('newPost.publish') }}
         </button>
       </form>
     </div>
     <div v-else class="empty-state" style="padding:80px 20px">
       <span>🎉</span>
-      <p>帖子发布成功！</p>
-      <router-link to="/forum" class="btn btn-primary" style="margin-top:16px">返回讨论区</router-link>
+      <p>{{ $t('newPost.success') }}</p>
+      <router-link to="/forum" class="btn btn-primary" style="margin-top:16px">{{ $t('newPost.backToForum') }}</router-link>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
-const router = useRouter()
+const { t } = useI18n()
 const submitted = ref(false)
 const uploading = ref(false)
 const form = ref({ author_name: '', category: '', title: '', content: '' })
@@ -81,27 +81,24 @@ function handleFileSelect(event) {
   const remainingSlots = 9 - selectedFiles.value.length
 
   if (files.length > remainingSlots) {
-    alert(`最多只能上传9张图片，当前还可以添加${remainingSlots}张`)
+    alert(t('newPost.maxImages', { remaining: remainingSlots }))
     return
   }
 
   files.forEach(file => {
-    // 检查文件大小
     if (file.size > 5 * 1024 * 1024) {
-      alert(`图片 ${file.name} 超过 5MB，已跳过`)
+      alert(t('newPost.fileTooLarge', { name: file.name }))
       return
     }
 
-    // 检查文件类型
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp']
     if (!allowedTypes.includes(file.type)) {
-      alert(`图片 ${file.name} 格式不支持，已跳过`)
+      alert(t('newPost.unsupportedFormat', { name: file.name }))
       return
     }
 
     selectedFiles.value.push(file)
 
-    // 生成预览
     const reader = new FileReader()
     reader.onload = (e) => {
       imagePreviews.value.push(e.target.result)
@@ -109,7 +106,6 @@ function handleFileSelect(event) {
     reader.readAsDataURL(file)
   })
 
-  // 清空 input
   event.target.value = ''
 }
 
@@ -128,7 +124,6 @@ async function submit() {
     formData.append('title', form.value.title)
     formData.append('content', form.value.content)
 
-    // 添加图片文件
     selectedFiles.value.forEach(file => {
       formData.append('images', file)
     })
@@ -142,10 +137,10 @@ async function submit() {
       submitted.value = true
     } else {
       const error = await res.json()
-      alert(error.error || '发布失败，请重试')
+      alert(error.error || t('newPost.publishFailed'))
     }
   } catch (err) {
-    alert('发布失败：' + err.message)
+    alert(t('newPost.publishError') + err.message)
   } finally {
     uploading.value = false
   }

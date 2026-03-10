@@ -2,7 +2,7 @@
   <router-link :to="`/forum/${post.id}`" class="post-item" style="text-decoration:none;color:inherit">
     <div class="post-content">
       <div style="display:flex;gap:8px;margin-bottom:8px">
-        <span class="tag" :class="tagClassMap[post.category] || 'tag-pink'">{{ categoryMap[post.category] || '讨论' }}</span>
+        <span class="tag" :class="tagClassMap[post.category] || 'tag-green'">{{ $t(`forum.${post.category}`, $t('forum.discuss')) }}</span>
       </div>
       <h3 class="post-title">{{ post.title }}</h3>
 
@@ -37,8 +37,7 @@ import { computed } from 'vue'
 
 const props = defineProps({ post: Object })
 
-const categoryMap = { showcase: '作品展示', help: '问题求助', experience: '经验分享', exchange: '闲置交换' }
-const tagClassMap = { showcase: 'tag-pink', help: 'tag-blue', experience: 'tag-purple', exchange: 'tag-pink' }
+const tagClassMap = { showcase: 'tag-green', help: 'tag-blue', experience: 'tag-purple', exchange: 'tag-pink' }
 
 const postImages = computed(() => {
   if (!props.post?.images) return []

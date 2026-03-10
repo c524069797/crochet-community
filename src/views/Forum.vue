@@ -1,19 +1,19 @@
 <template>
   <div class="container">
     <div class="page-header">
-      <h1>讨论区</h1>
-      <p>展示作品、交流经验、互帮互助</p>
+      <h1>{{ $t('forum.title') }}</h1>
+      <p>{{ $t('forum.subtitle') }}</p>
     </div>
 
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px">
       <div class="filter-bar" style="margin-bottom:0">
-        <button class="filter-btn" :class="{ active: category === '' }" @click="category = ''">全部</button>
-        <button class="filter-btn" :class="{ active: category === 'showcase' }" @click="category = 'showcase'">作品展示</button>
-        <button class="filter-btn" :class="{ active: category === 'help' }" @click="category = 'help'">问题求助</button>
-        <button class="filter-btn" :class="{ active: category === 'experience' }" @click="category = 'experience'">经验分享</button>
-        <button class="filter-btn" :class="{ active: category === 'exchange' }" @click="category = 'exchange'">闲置交换</button>
+        <button class="filter-btn" :class="{ active: category === '' }" @click="category = ''">{{ $t('forum.all') }}</button>
+        <button class="filter-btn" :class="{ active: category === 'showcase' }" @click="category = 'showcase'">{{ $t('forum.showcase') }}</button>
+        <button class="filter-btn" :class="{ active: category === 'help' }" @click="category = 'help'">{{ $t('forum.help') }}</button>
+        <button class="filter-btn" :class="{ active: category === 'experience' }" @click="category = 'experience'">{{ $t('forum.experience') }}</button>
+        <button class="filter-btn" :class="{ active: category === 'exchange' }" @click="category = 'exchange'">{{ $t('forum.exchange') }}</button>
       </div>
-      <router-link to="/forum/new" class="btn btn-primary">✏ 发帖</router-link>
+      <router-link to="/forum/new" class="btn btn-primary">✏ {{ $t('forum.newPost') }}</router-link>
     </div>
 
     <div class="post-list" v-if="filtered.length">
@@ -21,7 +21,7 @@
     </div>
     <div v-else class="empty-state">
       <span>💬</span>
-      <p>暂无帖子，来发第一帖吧！</p>
+      <p>{{ $t('forum.empty') }}</p>
     </div>
   </div>
 </template>

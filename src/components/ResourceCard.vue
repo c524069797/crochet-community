@@ -6,13 +6,13 @@
         {{ resource.type === 'pattern' ? '📐' : '🎬' }}
       </div>
       <span v-if="resource.platform" class="source-badge">
-        {{ platformLabel }}
+        {{ $t(`platform.${resource.platform}`, resource.platform) }}
       </span>
     </div>
     <div class="card-body">
       <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
         <span class="tag" :class="resource.type === 'pattern' ? 'tag-pink' : 'tag-blue'">
-          {{ resource.type === 'pattern' ? '图解' : '视频' }}
+          {{ resource.type === 'pattern' ? $t('resources.pattern') : $t('resources.video') }}
         </span>
         <span class="tag tag-purple">{{ categoryLabel }}</span>
       </div>
@@ -26,38 +26,45 @@
 
       <p class="card-text">{{ resource.description?.slice(0, 80) }}</p>
       <div class="card-actions">
-        <a v-if="resource.type === 'video' && resource.video_url" href="#" class="btn btn-sm btn-outline" @click.prevent="handleJump(resource.video_url)">观看视频</a>
-        <a v-if="resource.type === 'pattern' && resource.file_url" href="#" class="btn btn-sm btn-outline" @click.prevent="handleJump(resource.file_url)">查看图解</a>
+        <a v-if="resource.type === 'video' && resource.video_url" href="#" class="btn btn-sm btn-outline" @click.prevent="handleJump(resource.video_url)">{{ $t('resources.watchVideo') }}</a>
+        <a v-if="resource.type === 'pattern' && resource.file_url" href="#" class="btn btn-sm btn-outline" @click.prevent="handleJump(resource.file_url)">{{ $t('resources.viewPattern') }}</a>
+        <span v-if="resource.platform" class="source-text">{{ $t('resources.from') }} {{ $t(`platform.${resource.platform}`, resource.platform) }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const props = defineProps({ resource: Object })
-const categoryMap = { doll: '玩偶', scarf: '围巾', bag: '包包', hat: '帽子', blanket: '毯子', other: '其他' }
-const categoryLabel = categoryMap[props.resource.category] || props.resource.category
 
-const platformMap = { bilibili: 'B站', xiaohongshu: '小红书', douyin: '抖音' }
-const platformLabel = platformMap[props.resource.platform] || props.resource.platform || ''
+const categoryKeys = { doll: 'doll', scarf: 'scarf', bag: 'bag', hat: 'hat', blanket: 'blanket', other: 'other' }
+const categoryLabel = categoryKeys[props.resource.category]
+  ? t(`resources.${categoryKeys[props.resource.category]}`)
+  : props.resource.category
+
+const platformLabel = props.resource.platform
+  ? t(`platform.${props.resource.platform}`, props.resource.platform)
+  : ''
 
 function handleJump(url) {
   if (!url) return
 
   // 如果是占位符链接，提示用户
   if (url === '#') {
-    alert('该资源暂无下载链接\n\n图解资源正在整理中，敬请期待！')
+    alert(t('resources.noLink'))
     return
   }
 
   try {
     const urlObj = new URL(url)
-    const confirmed = confirm(`即将跳转至第三方网站（${urlObj.hostname}）\n\n本站仅提供资源索引，不对第三方内容负责。\n是否继续？`)
+    const confirmed = confirm(t('resources.jumpConfirm', { host: urlObj.hostname }))
     if (confirmed) {
       window.open(url, '_blank')
     }
   } catch (e) {
-    alert('链接格式错误，无法跳转')
+    alert(t('resources.linkError'))
   }
 }
 </script>

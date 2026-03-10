@@ -11,6 +11,7 @@
   --bg: #FDFCFA;
   --bg-card: #FFFFFF;
   --bg-soft: #F8F6F3;
+  --bg-warm: #F7F4F0;
   --text: #4A4A4A;
   --text-light: #7A7A7A;
   --text-muted: #ABABAB;
@@ -46,6 +47,7 @@
   --bg: #1E1E1E;
   --bg-card: #2A2A2A;
   --bg-soft: #353535;
+  --bg-warm: #2A2A28;
   --text: #E0E0E0;
   --text-light: #B8B8B8;
   --text-muted: #909090;
@@ -78,12 +80,12 @@ body {
 }
 
 a {
-  color: var(--primary-dark);
+  color: var(--primary);
   text-decoration: none;
   transition: var(--transition);
 }
 a:hover {
-  color: var(--primary);
+  color: var(--primary-dark);
 }
 
 img {
@@ -164,10 +166,16 @@ button, input, textarea, select {
   font-size: 1.8rem;
 }
 
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .navbar-nav {
   display: flex;
   list-style: none;
-  gap: 8px;
+  gap: 4px;
 }
 
 .navbar-nav a {
@@ -188,6 +196,28 @@ button, input, textarea, select {
   background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
   color: var(--primary-dark);
   font-weight: 600;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-light);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.lang-switch:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
 }
 
 .mobile-toggle {
@@ -272,8 +302,8 @@ button, input, textarea, select {
 .hero-actions {
   display: flex;
   gap: 16px;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   position: relative;
   z-index: 1;
 }
@@ -316,12 +346,13 @@ button, input, textarea, select {
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   color: var(--text);
+  border-color: var(--primary);
 }
 
 .btn-outline {
   background: transparent;
   border: 2px solid var(--primary);
-  color: var(--primary-dark);
+  color: var(--primary);
 }
 
 .btn-outline:hover {
@@ -364,7 +395,7 @@ button, input, textarea, select {
 }
 
 .card-title {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   margin-bottom: 10px;
   color: var(--text);
@@ -413,6 +444,11 @@ button, input, textarea, select {
 .tag-blue {
   background: var(--accent-light);
   color: var(--accent);
+}
+
+.tag-green {
+  background: var(--primary-light);
+  color: var(--primary-dark);
 }
 
 .rating {
@@ -496,16 +532,22 @@ button, input, textarea, select {
 
 .filter-btn {
   padding: 8px 20px;
-  border-radius: 20px;
+  border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--bg-card);
   color: var(--text-light);
   cursor: pointer;
   font-size: 0.9rem;
+  font-weight: 500;
   transition: var(--transition);
 }
 
-.filter-btn:hover,
+.filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
 .filter-btn.active {
   background: var(--primary);
   color: #fff;
@@ -516,7 +558,7 @@ button, input, textarea, select {
 .product-detail {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 48px;
   padding: 40px 0;
 }
 
@@ -534,11 +576,13 @@ button, input, textarea, select {
 .product-info h1 {
   font-size: 1.8rem;
   margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .product-info .price {
   font-size: 1.3rem;
-  color: var(--primary-dark);
+  color: var(--primary);
   font-weight: 700;
   margin-bottom: 16px;
 }
@@ -568,7 +612,7 @@ button, input, textarea, select {
 
 .buy-link:hover {
   border-color: var(--primary);
-  background: rgba(232,160,191,0.05);
+  background: var(--primary-light);
 }
 
 /* ========== Forum ========== */
@@ -587,11 +631,13 @@ button, input, textarea, select {
   box-shadow: var(--shadow);
   transition: var(--transition);
   cursor: pointer;
+  border: 1px solid transparent;
 }
 
 .post-item:hover {
   box-shadow: var(--shadow-hover);
   transform: translateY(-2px);
+  border-color: var(--border);
 }
 
 .post-content { flex: 1; }
@@ -632,11 +678,12 @@ button, input, textarea, select {
 .post-detail-header h1 {
   font-size: 1.8rem;
   margin-bottom: 12px;
+  font-weight: 700;
 }
 
 .post-detail-body {
   background: var(--bg-card);
-  padding: 30px;
+  padding: 32px;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   line-height: 1.8;
@@ -646,6 +693,7 @@ button, input, textarea, select {
 .comments-section h3 {
   margin-bottom: 20px;
   font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .comment-item {
@@ -762,12 +810,19 @@ select.form-control {
   margin-bottom: 16px;
 }
 
+/* ========== Error State ========== */
+.error-state {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+}
+
 /* ========== Like Button ========== */
 .like-btn {
   background: none;
   border: 1px solid var(--border);
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: 8px;
   cursor: pointer;
   color: var(--text-muted);
   transition: var(--transition);
@@ -778,8 +833,8 @@ select.form-control {
 
 .like-btn:hover, .like-btn.liked {
   border-color: var(--primary);
-  color: var(--primary-dark);
-  background: rgba(232,160,191,0.1);
+  color: var(--primary);
+  background: var(--primary-light);
 }
 
 /* ========== Responsive ========== */
@@ -904,6 +959,13 @@ select.form-control {
   .filter-btn {
     padding: 6px 16px;
     font-size: 0.85rem;
+  }
+
+  .lang-switch-mobile {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
   }
 }
 
@@ -1167,8 +1229,9 @@ select.form-control {
 .tab-btn:hover { color: var(--text); }
 
 .tab-btn.active {
-  color: var(--primary-dark);
+  color: var(--primary);
   border-bottom-color: var(--primary);
+  font-weight: 600;
 }
 
 /* ========== Loading ========== */

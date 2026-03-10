@@ -12,7 +12,7 @@
     <div class="card-body">
       <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px">
         <span class="tag" :class="product.category === 'yarn' ? 'tag-pink' : 'tag-purple'">
-          {{ product.category === 'yarn' ? '毛线' : '钩针' }}
+          {{ $t(`category.${product.category}`) }}
         </span>
         <span class="rating">{{ '★'.repeat(Math.round(product.rating || 0)) }}{{ '☆'.repeat(5 - Math.round(product.rating || 0)) }}</span>
       </div>
@@ -21,7 +21,7 @@
       <p class="card-text">{{ product.description?.slice(0, 60) }}...</p>
       <div class="card-footer">
         <span class="price">{{ product.price_range }}</span>
-        <span v-if="product.rating_count" class="review-count">{{ product.rating_count }}人评价</span>
+        <span v-if="product.rating_count" class="review-count">{{ product.rating_count }}{{ $t('products.reviews') }}</span>
       </div>
     </div>
   </router-link>
