@@ -1,5 +1,5 @@
 <template>
-  <div class="card resource-card">
+  <div class="card resource-card" @click="handleCardClick" style="cursor:pointer">
     <div class="card-header" :class="resource.type === 'pattern' ? 'header-pattern' : 'header-video'">
       <img v-if="resource.image_url" :src="proxyImg(resource.image_url)" :alt="resource.title" class="resource-image" />
       <div v-else class="resource-icon">
@@ -25,10 +25,8 @@
       </div>
 
       <p class="card-text">{{ resource.description?.slice(0, 80) }}</p>
-      <div class="card-actions">
-        <a v-if="resource.type === 'video' && resource.video_url" href="#" class="btn btn-sm btn-outline" @click.prevent="handleJump(resource.video_url)">{{ $t('resources.watchVideo') }}</a>
-        <a v-if="resource.type === 'pattern' && resource.file_url" href="#" class="btn btn-sm btn-outline" @click.prevent="handleJump(resource.file_url)">{{ $t('resources.viewPattern') }}</a>
-        <span v-if="resource.platform" class="source-text">{{ $t('resources.from') }} {{ $t(`platform.${resource.platform}`, resource.platform) }}</span>
+      <div class="card-actions" v-if="resource.platform">
+        <span class="source-text">{{ $t('resources.from') }} {{ $t(`platform.${resource.platform}`, resource.platform) }}</span>
       </div>
     </div>
   </div>
@@ -54,7 +52,9 @@ const platformLabel = props.resource.platform
   ? t(`platform.${props.resource.platform}`, props.resource.platform)
   : ''
 
-function handleJump(url) {
+function handleCardClick() {
+  const url = props.resource.type === 'video' ? props.resource.video_url : props.resource.file_url
+
   if (!url) return
 
   // 如果是占位符链接，提示用户
